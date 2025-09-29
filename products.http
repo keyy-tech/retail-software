@@ -1,0 +1,25 @@
+POST http://localhost:8000/products/
+Content-Type: application/json
+
+{
+  "name": "Product Test",
+  "price": 23.9,
+  "sku": "Product Test ",
+  "stock_quantity": 2,
+  "category": 1,
+  "extra_field": "check"
+}
+
+
+###
+GET http://localhost:8000/products/
+
+
+###
+POST http://localhost:8000/category/
+Content-Type: application/json
+
+{
+  "name": "Category Test"
+
+}
