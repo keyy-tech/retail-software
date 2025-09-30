@@ -12,6 +12,7 @@ from .models import Sales, SaleItems
 
 # Sales Views
 
+
 # Sales Views (Heavy Serializer)
 class SalesHeavyCreateList(APIView):
     """
@@ -63,18 +64,26 @@ class SalesHeavyViewUpdateDelete(APIView):
         if serializer.is_valid():
             serializer.save()  # Save updates
             return Response(
-                {"message": "Transaction updated successfully", "content": serializer.data},
+                {
+                    "message": "Transaction updated successfully",
+                    "content": serializer.data,
+                },
                 status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk):
         sales = self.get_object(pk)
-        serializer = SalesHeavySerializer(sales, data=request.data, partial=True)  # Partial update
+        serializer = SalesHeavySerializer(
+            sales, data=request.data, partial=True
+        )  # Partial update
         if serializer.is_valid():
             serializer.save()  # Save updates
             return Response(
-                {"message": "Transaction partially updated successfully", "content": serializer.data},
+                {
+                    "message": "Transaction partially updated successfully",
+                    "content": serializer.data,
+                },
                 status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -86,6 +95,7 @@ class SalesHeavyViewUpdateDelete(APIView):
             {"message": "Transaction deleted successfully"},
             status=status.HTTP_204_NO_CONTENT,
         )
+
 
 # Sales Views (Light Serializer)
 class SalesLightsCreateList(APIView):
@@ -147,7 +157,9 @@ class SalesLightViewUpdate(APIView):
 
     def patch(self, request, pk):
         sales = self.get_object(pk)
-        serializer = SalesLightSerializer(sales, data=request.data, partial=True)  # Partial update
+        serializer = SalesLightSerializer(
+            sales, data=request.data, partial=True
+        )  # Partial update
         if serializer.is_valid():
             serializer.save()
             response = {
@@ -165,6 +177,7 @@ class SalesLightViewUpdate(APIView):
             status=status.HTTP_204_NO_CONTENT,
         )
 
+
 # Sales Item Views (Heavy Serializer)
 class SalesItemHeavyCreateList(APIView):
     """
@@ -175,11 +188,15 @@ class SalesItemHeavyCreateList(APIView):
 
     def get(self, request):
         items = SaleItems.objects.all()  # Fetch all sale items
-        serializer = SalesItemHeavySerializer(items, many=True)  # Serialize sale items list
+        serializer = SalesItemHeavySerializer(
+            items, many=True
+        )  # Serialize sale items list
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = SalesItemHeavySerializer(data=request.data)  # Deserialize input data
+        serializer = SalesItemHeavySerializer(
+            data=request.data
+        )  # Deserialize input data
         if serializer.is_valid():  # Check if data is valid
             serializer.save()  # Save new sale item
             return Response(
@@ -212,7 +229,9 @@ class SalesItemHeavyViewUpdateDelete(APIView):
 
     def put(self, request, pk):
         item = self.get_object(pk)
-        serializer = SalesItemHeavySerializer(item, data=request.data)  # Update sale item
+        serializer = SalesItemHeavySerializer(
+            item, data=request.data
+        )  # Update sale item
         if serializer.is_valid():
             serializer.save()
             return Response(
@@ -223,11 +242,16 @@ class SalesItemHeavyViewUpdateDelete(APIView):
 
     def patch(self, request, pk):
         item = self.get_object(pk)
-        serializer = SalesItemHeavySerializer(item, data=request.data, partial=True)  # Partial update
+        serializer = SalesItemHeavySerializer(
+            item, data=request.data, partial=True
+        )  # Partial update
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"message": "Item partially updated successfully", "content": serializer.data},
+                {
+                    "message": "Item partially updated successfully",
+                    "content": serializer.data,
+                },
                 status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -250,11 +274,15 @@ class SalesItemLightCreateList(APIView):
 
     def get(self, request):
         items = SaleItems.objects.all()  # Fetch all sale items
-        serializer = SalesItemLightSerializer(items, many=True)  # Serialize sale items list
+        serializer = SalesItemLightSerializer(
+            items, many=True
+        )  # Serialize sale items list
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = SalesItemLightSerializer(data=request.data)  # Deserialize input data
+        serializer = SalesItemLightSerializer(
+            data=request.data
+        )  # Deserialize input data
         if serializer.is_valid():
             serializer.save()  # Save new sale item
             return Response(
@@ -287,7 +315,9 @@ class SalesItemLightViewUpdateDelete(APIView):
 
     def put(self, request, pk):
         item = self.get_object(pk)
-        serializer = SalesItemLightSerializer(item, data=request.data)  # Update sale item
+        serializer = SalesItemLightSerializer(
+            item, data=request.data
+        )  # Update sale item
         if serializer.is_valid():
             serializer.save()
             return Response(
@@ -298,11 +328,16 @@ class SalesItemLightViewUpdateDelete(APIView):
 
     def patch(self, request, pk):
         item = self.get_object(pk)
-        serializer = SalesItemLightSerializer(item, data=request.data, partial=True)  # Partial update
+        serializer = SalesItemLightSerializer(
+            item, data=request.data, partial=True
+        )  # Partial update
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"message": "Item partially updated successfully", "content": serializer.data},
+                {
+                    "message": "Item partially updated successfully",
+                    "content": serializer.data,
+                },
                 status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
