@@ -6,9 +6,8 @@ from rest_framework import status
 from .models import Products, Category
 from .serializers import ProductSerializer, CategorySerializer
 
+
 # Product Views
-
-
 class ProductListCreateView(APIView):
     """
     Handles listing all products and creating a new product.
@@ -62,6 +61,20 @@ class ProductListUpdateView(APIView):
             serializer.save()  # Save updates
             response = {
                 "message": "Product updated successfully",
+                "product": serializer.data,
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk):
+        product = self.get_object(pk)
+        serializer = ProductSerializer(
+            product, data=request.data, partial=True
+        )  # Deserialize and update partially
+        if serializer.is_valid():
+            serializer.save()  # Save updates
+            response = {
+                "message": "Product partially updated successfully",
                 "product": serializer.data,
             }
             return Response(response, status=status.HTTP_200_OK)
