@@ -122,7 +122,7 @@ class SalesLightsCreateList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SalesLightViewUpdate(APIView):
+class SalesLightViewUpdateDelete(APIView):
     """
     Handles retrieving, updating, partially updating, and deleting a single sale by its ID (light serializer).
     GET: Returns details of a specific sale.
