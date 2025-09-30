@@ -1,1 +1,14 @@
+
+# Ignore SQLite database
+db.sqlite3
+
+# Ignore migration files (optional if you don't want to push them)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Ignore PyCharm project settings
 .idea/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
